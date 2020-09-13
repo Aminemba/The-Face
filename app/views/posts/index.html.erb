@@ -1,0 +1,22 @@
+<h1 id="header-timeline">Timeline</h1>
+
+<div class="header_container-menu">
+<p id="notice"><%= notice %></p>
+<% @posts.each do |post| %>
+<article class="post">
+  <p class="content">
+    <strong><strong>UserID</strong></strong>
+  </p>
+  <br>
+  <p><%= post.posts %></p>
+  <%= image_tag(post.image.url) if post.image && post.image.url %>
+  <br>
+    <small><%= post.created_at.strftime('%Y/%-m/%-d %-H:%-M') %>
+    </small>
+  <br>
+  <span><%= link_to 'Show', post %></span>
+  <span><%= link_to 'Edit', edit_post_path(post) %></span>
+  <span><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+</article>
+<% end %>
+</div>

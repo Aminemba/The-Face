@@ -1,0 +1,10 @@
+<h3>Send the following...</h3>
+<%= form_with(model: @post, local: true) do |form| %>
+  <%= form.hidden_field :posts %>
+  <%= form.hidden_field :image %>
+  <p>Post:<%= @post.posts %></p>
+  <%= image_tag(@post.image.url) if @post.image && @post.image.url %>
+  <%= form.hidden_field :image_cache %>
+  <%= form.submit "submit" %>
+  <%= form.submit "back", name:'back' %>
+<% end %>

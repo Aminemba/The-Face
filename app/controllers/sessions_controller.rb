@@ -1,24 +1,24 @@
 class SessionsController < ApplicationController
-  skip_before_action :ensure_login, only: [:new, :create]
+
   def new
   	# Login Page - new.html.erb
   end
 
   def create
-  	user = User.find (user_params[:email])
-  	password = user_params [:password]
-
-  	if user && user.authenticate(password)
-  	  session[:user_id] = user.id
-  	  redirect_to root_path, notice: "Logged in successfully"
-  	else
-  	  redirect_to login_path, alert: "Invalid username/password combination"
-  	end
+    user = User.find_by(email: params[:session][:email].downcase)
+    if user && user.authenticate(params[:session][:password])
+      session[:user_id] = user.id
+      redirect_to user_path(user.id)
+    else
+      flash[:danger] = 'failed to login'
+      render :new
+    end
   end
 
   def destroy
-  	reset_session # wipe out session and everything in it
-    redirect_to login_path, notice: "You have been logged out"
+    session.delete(:user_id)
+    flash[ :notice ]= ' logged out '
+    redirect_to new_session_path
   end
 
 
@@ -27,7 +27,7 @@ private
     @user = User.find(params[:id])
   end
   def user_params
-    params.permit(:email, :password )
+    params.permit(:name, :email, :password , :password_confirmation )
   end
 
 end

@@ -2,21 +2,21 @@ class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   def index
-    @posts = current_user.Post.all.paginate(page: params[:page], per_page: 10)
+    @posts = Post.all
   end
 
   def show
   end
 
   def new
-    @post = current_user.Post.new
+    @post = Post.new
   end
 
   def edit
   end
 
   def create
-    @post = current_user.Post.new(post_params)
+    @post = Post.new(post_params)
 
     respond_to do |format|
       if @post.save
@@ -41,7 +41,6 @@ class PostsController < ApplicationController
     end
   end
 
-
   def destroy
     @post.destroy
     respond_to do |format|
@@ -51,13 +50,11 @@ class PostsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_post
-      @post = current_user.Post.find(params[:id])
-    end
+  def set_post
+    @post = Post.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def post_params
-      params.fetch(:post, {})
-    end
+  def post_params
+    params.require(:post).permit(:posts, :image, :image_cache)
+  end
 end

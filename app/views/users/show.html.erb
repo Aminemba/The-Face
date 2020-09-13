@@ -1,6 +1,11 @@
-<p id="notice"><%= notice %></p>
 
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', users_path %>
-
-<h1> This is users/show page </h1>
+<h1><%= @user.name %>UserCJ</h1>
+<p>User email: <%= @user.email %></p>
+<% @posts.each do |post| %>
+<section>
+  <p class="created_at"><%= post.created_at.strftime('%Y/%-m/%-d %-H:%-M') %></p>
+  <p><%= post.posts %></p>
+  <%= image_tag(post.image.url) if post.image && post.image.url %>
+  <%= link_to posts_path %>
+</section>
+<% end %>

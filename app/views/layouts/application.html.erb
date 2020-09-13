@@ -1,27 +1,46 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Facebooky</title>
+    <title>Facebook CLone</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+
   </head>
 
   <body>
+    <div class="header-container clearfix">
+      <header>
+        <%= link_to posts_path do %> Facebooky
+        <% end %>
+      </header>
 
-<% if logged_in? %>
-  <div style='float: right;'>
-    Logged in as <%= current_user.name %> |
-    <%= link_to "Logout", logout_path, method: :delete %>
-  </div>
-<% end %>
-
-<% flash.each do |key, value| %>
-  <p id='<%= key %>'><%= value %></p>
-<% end %>
-
-    <%= yield %>
-    
+      <div class="notice">
+        <% if flash[:notice] %>
+          <p class="notice"><%= notice %></p>
+        <% end %>
+        <% if flash[:alert] %>
+        <p class="alert"><%= alert %></p>
+        <% end %>
+      </div>
+      <% flash.each do |key, value| %>
+      <%= content_tag(:div, value, class: "#{key}") %>
+      <% end %>
+      <% if logged_in? %>
+        <%= link_to "Profile", user_path(current_user.id) %>
+        <%= link_to "Logout", session_path(current_user.id), method: :delete %>
+      <% else %>
+        <%= link_to "Sign up", new_user_path %>
+        <%= link_to "Login", new_session_path %>
+      <% end %>
+      <%= yield %>
+    </div>
+    <footer class="footer clearfix">
+      <p> Copyright © 2020 This facebook clone </p>
+    </footer>
   </body>
 </html>

@@ -1,13 +1,12 @@
-<h1>Login</h1>
+<h1>Log In</h1>
 
-<%= form_for(:reviewer, url: sessions_path) do |f| %>
+<%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
 
-  <div class="field"><%= f.label :name %> <br/> <%= f.text_field :name %></div>
+<div class="field"> <%= f.label :name %> <br/> <%= f.text_field :name %></div>
+<br/>
+<div class="field"> <%= f.label :password %> <br/> <%= f.password_field :password %></div>
 
-  <p/>
+<br/>
+<div class="actions"> <%= f.submit "Login" %></div>
 
-  <div class="field"><%= f.label :password %> <br/> <%= f.password_field :password %></div>
-
-  <div class="actions"><%= f.submit "Login" %></div>
-  
 <% end %>

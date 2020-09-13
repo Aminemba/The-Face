@@ -6,10 +6,22 @@
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
+
+<% if logged_in? %>
+  <div style='float: right;'>
+    Logged in as <%= current_user.name %> |
+    <%= link_to "Logout", logout_path, method: :delete %>
+  </div>
+<% end %>
+
+<% flash.each do |key, value| %>
+  <p id='<%= key %>'><%= value %></p>
+<% end %>
+
     <%= yield %>
+    
   </body>
 </html>

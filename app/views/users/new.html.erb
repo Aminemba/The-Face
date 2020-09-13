@@ -1,5 +1,32 @@
-<h1>New User</h1>
+<h2> Sign up </h2>
 
-<%= render 'form', user: @user %>
+<%= form_for(:users, url: users_path , method: :post ) do |f| %>
 
-<%= link_to 'Back', users_path %>
+
+  <div class="field">
+    <%= f.label :name %><br />
+    <%= f.text_field :name, autofocus: true, autocomplete: "name" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password %>
+    <% if @minimum_password_length %>
+    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <% end %><br />
+    <%= f.password_field :password, autocomplete: "new-password" %>
+  </div>
+
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation, autocomplete: "password-confirmation" %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "Create my account " %>
+  </div>
+<% end %>

@@ -15,21 +15,15 @@
   <body>
     <div class="header-container clearfix">
       <header>
-        <%= link_to posts_path do %> Facebooky
+        <%= link_to root_path do %> Facebooky
         <% end %>
       </header>
 
-      <div class="notice">
-        <% if flash[:notice] %>
-          <p class="notice"><%= notice %></p>
-        <% end %>
-        <% if flash[:alert] %>
-        <p class="alert"><%= alert %></p>
-        <% end %>
-      </div>
+  
       <% flash.each do |key, value| %>
       <%= content_tag(:div, value, class: "#{key}") %>
       <% end %>
+
       <% if logged_in? %>
         <%= link_to "Profile", user_path(current_user.id) %>
         <%= link_to "Logout", session_path(current_user.id), method: :delete %>
@@ -39,6 +33,8 @@
       <% end %>
       <%= yield %>
     </div>
+
+
     <footer class="footer clearfix">
       <strong>Facebook Clone</strong> by <a href="https://github.com/Aminemba/The-Face.git">Amine Lh</a>. One Step at a Time ...
          <a href="https://diver.diveintocode.jp">Join us on Diver </a>.

@@ -2,13 +2,14 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
 
 
+
   def index
     @users = User.all
   end
 
 
   def show
-    @user = User.find(params[:id])
+    @user = User.find(user_params[:id])
     @posts = @user.posts.order(created_at: "DESC")
   end
 
@@ -59,10 +60,9 @@ class UsersController < ApplicationController
 
   private
     def set_user
-      @user = User.find(params[:id])
+      @user = User.find(user_params[:id])
     end
     def user_params
-      params.permit(:name, :email, :password,
-                                   :password_confirmation)
+      params.require( :user ).permit( :name, :email, :password , :password_confirmation)
     end
 end

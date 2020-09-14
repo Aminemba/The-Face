@@ -1,12 +1,13 @@
 class SessionsController < ApplicationController
 
+
   def new
   	# Login Page - new.html.erb
   end
 
   def create
-    user = User.find_by(email: params[:session][:email].downcase)
-    if user && user.authenticate(params[:session][:password])
+    user = User.find_by(email: user_params[:session][:email])
+    if user && user.authenticate(user_params[:session][:password])
       session[:user_id] = user.id
       redirect_to user_path(user.id)
     else
@@ -24,10 +25,11 @@ class SessionsController < ApplicationController
 
 private
   def set_user
-    @user = User.find(params[:id])
+    @user = User.find(user_params[:id])
   end
+
   def user_params
-    params.permit(:name, :email, :password , :password_confirmation )
+    params.require( :user ).permit( :name, :email, :password , :password_confirmation)
   end
 
 end

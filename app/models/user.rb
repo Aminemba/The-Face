@@ -1,12 +1,9 @@
 class User < ApplicationRecord
 
-
-  validates :name, presence: true, length: {maximum: 30}
-  validates :email, uniqueness: true, length: {maximum: 255},
-                    format: {with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i}
+  has_many :posts
+  validates :name, presence: true
+  validates :email, uniqueness: true
+  validates_format_of :email, with: /@/
 
   has_secure_password
-  validates :password, presence: true, length: {minimum: 6}
-  has_many :posts
-
 end

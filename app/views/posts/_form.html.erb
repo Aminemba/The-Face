@@ -1,4 +1,6 @@
-<%= form_with(model: post, local: true ,url: choose_new_or_edit ) do |form| %>
+
+
+<%= form_with(model: post, local: true ,url: choose_new_or_edit ) do |f| %>
 
   <% if post.errors.any? %>
     <div id="error_explanation">
@@ -12,18 +14,17 @@
       </ul>
     </div>
   <% end %>
-  
+
   <div class="field">
-    <%= form.label :post %>
-    <%= form.text_area :post %>
-  </div>
-  <div class="field">
-    <%= form.label :image %>
+    <%= f.label :image %>
     <%= image_tag(@post.image.url) if @post.image && @post.image.url %>
-    <%= form.file_field :image %>
-    <%= form.hidden_field :image_cache %>
+    <%= f.file_field :image %>
+    <%= f.hidden_field :image_cache %>
   </div>
-  <div class="actions">
-    <%= form.submit %>
+
+  <div class="field">
+      <%= f.text_area :content, placeholder: "What are you thinking..." %>
   </div>
-<% end %>
+  <br>
+    <%= f.submit "Publish", class: "btn btn-primary btn-publish" %>
+   <% end %>

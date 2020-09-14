@@ -5,8 +5,22 @@ class PostsController < ApplicationController
   before_action :logged_in?
 
   def index
-    @posts = current_user.posts.all
-  end
+      @post = Post.new
+      @posts = current_user.friends_and_own_posts
+    end
+
+    def create
+      @post = current_user.posts.build(post_params)
+      if @post.save
+        flash[:success] = 'post created!'
+        redirect_to authenticated_root_path
+
+      else
+        flash[:danger] = 'Try again!'
+        redirect_to authenticated_root_path
+      end
+    end
+
 
   def show
   end
@@ -16,20 +30,6 @@ class PostsController < ApplicationController
   end
 
   def edit
-  end
-
-  def create
-    @post = current_user.posts.build(post_params)
-
-    respond_to do |format|
-      if @post.save
-        format.html { redirect_to user_posts_path, notice: 'Post was successfully created.' }
-        format.json { render :show, status: :created, location: @post }
-      else
-        format.html { render :new }
-        format.json { render json: @post.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   def update
@@ -50,13 +50,15 @@ class PostsController < ApplicationController
     render :new if @post.invalid?
   end
 
+
+
   def destroy
-    @post.destroy
-    respond_to do |format|
-      format.html { redirect_to user_posts_url, notice: 'Post was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+  @post = current_user.posts.find_by(id: params[:id])
+  @post.destroy
+  flash[:success] = 'Post deleted'
+  redirect_to current_user
   end
+
 
   private
 
@@ -69,6 +71,6 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:posts, :id, :image, :image_cache, :user_id)
+    params.require(:post).permit(:content)
   end
 end

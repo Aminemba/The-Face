@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  
+
   def new
   	# Login Page - new.html.erb
   end
@@ -20,10 +20,4 @@ class SessionsController < ApplicationController
     flash[ :notice ]= ' logged out '
     redirect_to new_session_path
   end
-
-
-
-
-
-
 end

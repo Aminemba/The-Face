@@ -4,6 +4,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.6.5'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
+gem 'bulma-rails', '~> 0.9.0'
 gem 'rails', '~> 5.2.4'
 # Use postgresql as the database for Active Record
 gem 'pg', '>= 0.18', '< 2.0'
@@ -21,6 +22,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 
 gem 'bcrypt', '~> 3.1', '>= 3.1.16'
+gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
@@ -54,3 +56,6 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'will_paginate', '~> 3.0.6'
+gem 'bootstrap-sass', '~> 3.3.6'
+gem 'autoprefixer-rails'
+gem 'bootstrap-will_paginate', '~> 1.0'

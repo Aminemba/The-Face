@@ -1,9 +1,7 @@
 
   <header class="header-info" id= "header-display">
     <div class="title">
-    <%= link_to root_path do %>
-      <h1>Facebooky</h1>
-    <% end %>
+    <%= link_to root_path do %><h1><strong>Facebooky</strong></h1><% end %>
    </div>
     <svg   width="300px" >
 
@@ -19,11 +17,12 @@
       <% else %>
          |
       <% end %>
-      <i class="fas fa-user-edit"></i>    <%= link_to 'Edit profile', edit_user_path, :class => 'navbar-link' %> |
-      <%= link_to "Logout", session_path, method: :delete, :class => 'navbar-link'  %>
+      <i class="fas fa-user-edit"></i>    <%= link_to 'Edit profile', edit_user_path(current_user.id), :class => 'navbar-link' %> |
+      <%= link_to "Logout", session_path(current_user.id), method: :delete, class: 'navbar-link'  %>
     <% else %>
       <%= link_to "Sign up", new_user_path, :class => 'navbar-link'  %> |
       <%= link_to "Login", new_session_path, :class => 'navbar-link'  %>
     <% end %>
     </div>
+
 </header>

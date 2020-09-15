@@ -1,4 +1,7 @@
 <div class="text-center">
+
+  <%= flash[:danger] %>
+
 <h2><strong>Sign In</strong></h2>
 
 <%= form_with(scope: :session, url: sessions_path, local: true) do |f| %>
@@ -11,5 +14,6 @@
 <div class="actions"> <%= f.submit "Login" %></div>
 
 <% end %>
+
 
 </div>

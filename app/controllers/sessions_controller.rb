@@ -1,7 +1,10 @@
 class SessionsController < ApplicationController
 
   def new
-  	# Login Page - new.html.erb
+      flash[:danger] = ''
+        if logged_in?
+          redirect_to posts_path
+        end
   end
 
   def create
@@ -16,6 +19,11 @@ class SessionsController < ApplicationController
   end
 
   def destroy
+    # User.find(session[:user_id])
+    # # session[:user_id] = nil
+    # flash[ :notice ]= ' logged out '
+    # redirect_to new_session_path
+
     session.delete(:user_id)
     flash[ :notice ]= ' logged out '
     redirect_to new_session_path

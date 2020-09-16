@@ -1,7 +1,7 @@
 class PostsController < ApplicationController
-    before_action :set_post, only: [:show, :edit, :update, :destroy]
-    # before_action :current_user
-    # before_action :authenticate_user
+    before_action :set_post, only: [:confirm,:show, :edit, :update, :destroy]
+    before_action :current_user
+    before_action :authenticate_user
     before_action :logged_in?
 
   def index
@@ -11,7 +11,7 @@ class PostsController < ApplicationController
 
     def show
     end
-    
+
     def edit
     end
 
@@ -57,8 +57,11 @@ class PostsController < ApplicationController
   def confirm
     @post = current_user.posts.build(post_params)
     @post.id = params[:id]
-    render :new if @post.invalid?
-  end
+    respond_to do |format|
+    if @post.invalid?
+        format.html {redirect_to new_post_path  notice: 'Post was successfully created.' }
+    end
+   end
 
   def destroy
     @post.destroy
@@ -66,6 +69,7 @@ class PostsController < ApplicationController
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
+   end
   end
 
 

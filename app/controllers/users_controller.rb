@@ -2,12 +2,19 @@ class UsersController < ApplicationController
 
   before_action :set_user, only: [ :show , :edit, :update, :destroy]
 
-  def show
-  @posts= Post.all
-  # @posts = @user.posts.paginate(page: params[:page])
-  # @post = @user.posts.build
-  # @comments = Comment.all
+  # def show
+  # @posts= Post.all
+  # # @posts = @user.posts.paginate(page: params[:page])
+  # # @post = @user.posts.build
+  # # @comments = Comment.all
+  #
+  # end
 
+  def show
+    @user = User.find(params[:id])
+    @posts = @user.posts.paginate(page: params[:page])
+    @post = @user.posts.build
+    @comments = Comment.all
   end
 
   def index
@@ -15,6 +22,14 @@ class UsersController < ApplicationController
     @friendships = current_user.friendships
     @inverse_friendships = current_user.inverse_friendships
   end
+# end
+#
+#
+#   def index
+#     @users = User.all
+#     @friendships = current_user.friendships
+#     @inverse_friendships = current_user.inverse_friendships
+#   end
 
 
   def new

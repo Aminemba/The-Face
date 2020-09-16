@@ -1,19 +1,19 @@
-<h1 id="header-timeline">Timeline</h1>
+
 
 <div class="text-center ">
-<span><%= link_to 'New Post', new_post_path %></span>
-</div>
+  <h1 id="header-timeline"> <strong>Timeline</strong></h1>
 
+<span><%= link_to 'New Post', new_post_path , class: "btn btn-primary" %></span>
 
 <div class="header_container-menu">
 <p id="notice"><%= notice %></p>
 <% @posts.each do |post| %>
 <article class="post">
   <p class="content">
-    <strong><strong>UserID</strong></strong>
+    <strong><strong><%=current_user.name%></strong></strong>
   </p>
   <br>
-  <p><%= post.posts %></p>
+  <p><%= post.content %></p>
   <%= image_tag(post.image.url) if post.image && post.image.url %>
   <br>
     <small><%= post.created_at.strftime('%Y/%-m/%-d %-H:%-M') %>
@@ -24,4 +24,5 @@
   <span><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></span>
 </article>
 <% end %>
+</div>
 </div>

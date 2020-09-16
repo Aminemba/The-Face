@@ -19,11 +19,6 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    # User.find(session[:user_id])
-    # # session[:user_id] = nil
-    # flash[ :notice ]= ' logged out '
-    # redirect_to new_session_path
-
     session.delete(:user_id)
     flash[ :notice ]= ' logged out '
     redirect_to new_session_path

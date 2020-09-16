@@ -1,16 +1,17 @@
 class PostsController < ApplicationController
-  before_action :set_post, only: [:show, :edit, :update, :destroy]
-    before_action :current_user
-    before_action :authenticate_user
+    before_action :set_post, only: [:show, :edit, :update, :destroy]
+    # before_action :current_user
+    # before_action :authenticate_user
     before_action :logged_in?
 
   def index
-      @post = Post.all
-      # @posts = current_user.friends_and_own_posts
+      @post = Post.new
+      @posts = Post.all
     end
 
     def show
     end
+    
     def edit
     end
 
@@ -80,5 +81,5 @@ class PostsController < ApplicationController
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
   end
-  
+
 end

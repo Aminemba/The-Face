@@ -1,36 +1,36 @@
 
 <%= form_with(model: post, local: true ,url: choose_new_or_edit ) do |f| %>
 
-  <% if post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-      <ul>
-        <% post.errors.full_messages.each do |message| %>
-          <div class="alert alert-danger" role="alert">
-            <li><%= message %></li>
-          </div>
-        <% end %>
-      </ul>
+<% if post.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+  <ul>
+    <% post.errors.full_messages.each do |message| %>
+    <div class="alert alert-danger" role="alert">
+      <li><%= message %></li>
     </div>
-  <% end %>
-
-
-  <div class="field">
-      <%= f.text_area :content, placeholder: "What are you thinking..." %>
-      <%= f.hidden_field :id   %>
-
-  </div>
-
-  <div class="field ">
-    <%= f.label :image %>
-    <%= image_tag(@post.image.url) if @post.image && @post.image.url %>
-    <%= f.file_field :image %>
-    <%= f.hidden_field :image_cache %>
-    <%= f.hidden_field :user_id ,value: current_user.id  %>
-       <br>
-    </div>
-
-   <div class="text-center ">
-    <%= f.submit "Publish", class: "btn btn-primary btn-publish" %>
     <% end %>
-   </div>
+  </ul>
+</div>
+<% end %>
+
+
+<div class="field">
+  <%= f.text_area :content, placeholder: "What are you thinking..." %>
+  <%= f.hidden_field :id   %>
+
+</div>
+
+<div class="field ">
+  <%= f.label :image %>
+  <%= image_tag(@post.image.url) if @post.image && @post.image.url %>
+  <%= f.file_field :image %>
+  <%= f.hidden_field :image_cache %>
+  <%= f.hidden_field :user_id ,value: current_user.id  %>
+  <br>
+</div>
+
+<div class="text-center ">
+  <%= f.submit "Publish", class: "btn btn-primary btn-publish" %>
+  <% end %>
+</div>

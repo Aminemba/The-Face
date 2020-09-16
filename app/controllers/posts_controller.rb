@@ -1,7 +1,5 @@
 class PostsController < ApplicationController
-    before_action :set_post, only: [:confirm,:show, :edit, :update, :destroy]
-    before_action :current_user
-    before_action :authenticate_user
+    before_action :set_post, only: [:show, :edit, :update, :destroy]
     before_action :logged_in?
 
   def index
@@ -25,11 +23,10 @@ class PostsController < ApplicationController
 
 
     def create
-      @post = Post.new(post_params)
-      # @post = posts.build(post_params)
+      @post = Post.new
 
       respond_to do |format|
-        if @post.save
+        if @post.save(validate: false)
           format.html { redirect_to @post, notice: 'Post was successfully created.' }
           format.json { render :show, status: :created, location: @post }
         else
@@ -57,18 +54,13 @@ class PostsController < ApplicationController
   def confirm
     @post = current_user.posts.build(post_params)
     @post.id = params[:id]
-    respond_to do |format|
-    if @post.invalid?
-        format.html {redirect_to new_post_path  notice: 'Post was successfully created.' }
-    end
-   end
+ end
 
   def destroy
     @post.destroy
     respond_to do |format|
       format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
-    end
    end
   end
 
@@ -82,8 +74,8 @@ class PostsController < ApplicationController
     params.require(:post).permit(:content , :id, :image, :image_cache, :user_id)
   end
 
-  def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
-  end
+  # def current_user
+  #   @current_user ||= User.find_by(id: session[:user_id])
+  # end
 
 end

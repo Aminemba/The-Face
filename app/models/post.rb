@@ -1,12 +1,12 @@
 class Post < ApplicationRecord
 
-  belongs_to :user,foreign_key: 'user_id'
+  belongs_to :user,class_name: 'User',foreign_key: 'user_id'
   validates :posts, presence: true
   validates :image, presence: true
   # has_many :comments, foreign_key: 'post_id'
   # has_many :user_id, through: :comment, source: 'User'
   # has_many :likes, as: :likeable
-  default_scope -> { order(created_at: :desc) }
+  # default_scope -> { order(created_at: :desc) }
   validates :content, presence: true, length: { maximum: 140 }
   mount_uploader :image, ImageUploader
 

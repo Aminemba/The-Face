@@ -1,7 +1,6 @@
 <h2><strong>New Post</strong></h2>
 
-
-<%= render 'form', post: @post %>
-<%# <%= render 'post', post: @post %> %>
-
-<%= link_to 'Back', posts_path %>
+<div class=" text-center ">
+  <%= render 'form', post: @post %>
+  <%= link_to 'Back', posts_path , class: "btn " %>
+</div>

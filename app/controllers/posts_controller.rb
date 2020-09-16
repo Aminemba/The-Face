@@ -1,36 +1,44 @@
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
-  before_action :current_user
-  # before_action :authenticate_user
-  before_action :logged_in?
+    before_action :current_user
+    before_action :authenticate_user
+    before_action :logged_in?
 
   def index
-      @post = Post.new
-      @posts = current_user.friends_and_own_posts
+      @post = Post.all
+      # @posts = current_user.friends_and_own_posts
     end
 
-    def create
-      @post = current_user.posts.build(post_params)
-      if @post.save
-        flash[:success] = 'post created!'
-        redirect_to authenticated_root_path
+    def show
+    end
+    def edit
+    end
 
+    def new
+      if params[:back]
+        @post = Post.new(post_params)
       else
-        flash[:danger] = 'Try again!'
-        redirect_to authenticated_root_path
+        @post = Post.new
       end
     end
 
 
-  def show
-  end
+    def create
+      @post = posts.build(post_params)
 
-  def new
-    @post = current_user.Post.new
-  end
+      respond_to do |format|
+        if @post.save
+          format.html { redirect_to @post, notice: 'Post was successfully created.' }
+          format.json { render :show, status: :created, location: @post }
+        else
+          format.html { render :new }
+          format.json { render json: @post.errors, status: :unprocessable_entity }
+        end
+      end
+    end
 
-  def edit
-  end
+
+
 
   def update
     respond_to do |format|
@@ -45,32 +53,28 @@ class PostsController < ApplicationController
   end
 
   def confirm
-    @post = current_user.posts.build(post_params)
-    @post.id = post_params[:id]
+    @post = posts.build(post_params)
+    @post.id = params[:id]
     render :new if @post.invalid?
   end
 
-
-
   def destroy
-  @post = current_user.posts.find_by(id: params[:id])
-  @post.destroy
-  flash[:success] = 'Post deleted'
-  redirect_to current_user
+    @post.destroy
+    respond_to do |format|
+      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
 
   private
-
-  def current_user
-    @current_user ||= User.find_by(id: session[:user_id])
-  end
-
   def set_post
-    @post = current_user.Post.find(user_params[:id])
+    @post = Post.find(params[:id])
   end
 
   def post_params
-    params.require(:post).permit(:content)
+    params.require(:post).permit(:posts, :id, :image, :image_cache, :user_id)
   end
+
+
 end

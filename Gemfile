@@ -23,6 +23,7 @@ gem 'jbuilder', '~> 2.7'
 
 gem 'bcrypt', '~> 3.1', '>= 3.1.16'
 gem 'font-awesome-rails', '~> 4.7', '>= 4.7.0.5'
+gem 'carrierwave', '~> 2.1'
 
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'

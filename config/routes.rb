@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   resources :posts, only: [:new , :create, :destroy, :index] do
     collection do
       post :confirm
+      patch :confirm
     end
     resources :likes, module: :posts
     resources :comments, only: [:create, :destroy] do

@@ -10,4 +10,6 @@ class Post < ApplicationRecord
   validates :content, presence: true, length: { maximum: 140 }
   validates :author, presence: true
 
+  mount_uploader :image, ImageUploader
+
 end

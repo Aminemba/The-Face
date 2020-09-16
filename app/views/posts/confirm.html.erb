@@ -1,11 +1,12 @@
 <h2> Confirmation Page </h2>
 
 <%= form_with(model: @post, local: true) do |form| %>
-  <%= form.hidden_field :posts %>
+  <%= form.hidden_field :content %>
   <%= form.hidden_field :image %>
-  <p>Post:<%= @post.posts %></p>
+  <p>Post:<%= @post.content %></p>
   <%= image_tag(@post.image.url) if @post.image && @post.image.url %>
   <%= form.hidden_field :image_cache %>
+  <%= form.hidden_field :user_id %>
   <%= form.submit "submit" %>
   <%= form.submit "back", name:'back' %>
 <% end %>

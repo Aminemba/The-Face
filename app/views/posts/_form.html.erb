@@ -5,7 +5,7 @@
     <div id="error_explanation">
       <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
       <ul>
-        <% @post.errors.full_messages.each do |message| %>
+        <% post.errors.full_messages.each do |message| %>
           <div class="alert alert-danger" role="alert">
             <li><%= message %></li>
           </div>
@@ -16,7 +16,7 @@
 
 
   <div class="field">
-      <%= f.text_area :posts, placeholder: "What are you thinking..." %>
+      <%= f.text_area :content, placeholder: "What are you thinking..." %>
   </div>
 
   <div class="field ">
@@ -24,6 +24,7 @@
     <%= image_tag(@post.image.url) if @post.image && @post.image.url %>
     <%= f.file_field :image %>
     <%= f.hidden_field :image_cache %>
+    <%= f.hidden_field :user_id ,value: current_user.id  %>
        <br>
     </div>
 

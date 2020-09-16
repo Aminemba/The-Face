@@ -17,7 +17,7 @@ Rails.application.routes.draw do
   resources :friendships
   post '/friendship/create/:id', to: 'friendships#create'
 
-  resources :posts, only: [:new , :create, :destroy, :index] do
+  resources :posts do
     collection do
       post :confirm
       patch :confirm

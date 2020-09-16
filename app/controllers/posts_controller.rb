@@ -24,7 +24,8 @@ class PostsController < ApplicationController
 
 
     def create
-      @post = posts.build(post_params)
+      @post = Post.new(post_params)
+      # @post = posts.build(post_params)
 
       respond_to do |format|
         if @post.save
@@ -53,7 +54,7 @@ class PostsController < ApplicationController
   end
 
   def confirm
-    @post = posts.build(post_params)
+    @post = current_user.posts.build(post_params)
     @post.id = params[:id]
     render :new if @post.invalid?
   end
@@ -73,8 +74,11 @@ class PostsController < ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:posts, :id, :image, :image_cache, :user_id)
+    params.require(:post).permit(:content , :id, :image, :image_cache, :user_id)
   end
 
-
+  def current_user
+    @current_user ||= User.find_by(id: session[:user_id])
+  end
+  
 end

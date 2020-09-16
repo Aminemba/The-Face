@@ -1,11 +1,11 @@
-require 'boot'
+require_relative 'boot'
 
 require 'rails/all'
 require 'carrierwave'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
-Bundler.require_relative(*Rails.groups)
+Bundler.require(*Rails.groups)
 
 
 module Facebooky

@@ -17,10 +17,11 @@ Rails.application.routes.draw do
   resources :friendships
   post '/friendship/create/:id', to: 'friendships#create'
 
-  resources :posts do
+
+  resources :posts ,only: [:new ,:show , :update , :confirm, :edit, :index, :create, :destroy] do
+  get "/post/:id", to: "post#destroy"
     collection do
       post :confirm
-      patch :confirm
     end
     resources :likes, module: :posts
     resources :comments, only: [:create, :destroy] do

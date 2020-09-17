@@ -18,9 +18,9 @@
     <small><%= post.created_at.strftime('%Y/%-m/%-d %-H:%-M') %>
     </small>
   <br>
-  <span><%= link_to 'Show', post %></span>
-  <span><%= link_to 'Edit', edit_post_path(post) %></span>
-  <span><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' } %></span>
+  <span><%= link_to 'Show', post , class: 'btn btn-primary' %></span>
+  <span><%= link_to 'Edit', edit_post_path(post) , class: 'btn btn-primary' %></span>
+  <span><%= link_to 'Delete', post, method: :delete, data: { confirm: 'Are you sure?' },  class: 'btn btn-primary' %></span>
 </article>
 <% end %>
 </div>

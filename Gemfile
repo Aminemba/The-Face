@@ -3,6 +3,8 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 # ruby '2.6.5'
 
+
+
 gem 'rake', '~> 13.0', '>= 13.0.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'bulma-rails', '~> 0.9.0'
@@ -63,3 +65,4 @@ gem 'will_paginate', '~> 3.0.6'
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'autoprefixer-rails'
 gem 'bootstrap-will_paginate', '~> 1.0'
+gem 'jquery-rails'

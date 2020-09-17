@@ -1,7 +1,7 @@
 class Post < ApplicationRecord
 
   belongs_to :user,class_name: 'User',foreign_key: 'user_id'
-  validates :posts, presence: true
+  validates :content, presence: true
   validates :image, presence: true
   # has_many :comments, foreign_key: 'post_id'
   # has_many :user_id, through: :comment, source: 'User'

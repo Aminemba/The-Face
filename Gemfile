@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.5'
+# ruby '2.6.5'
 
-
+gem 'rake', '~> 13.0', '>= 13.0.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'bulma-rails', '~> 0.9.0'
 gem 'rails', '~> 5.2.4'
